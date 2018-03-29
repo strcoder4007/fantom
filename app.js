@@ -8,11 +8,18 @@ const phantom = require('phantom');
     
     var reviews = await page.evaluate(function() {
         var junk = [];
-        var xs = document.querySelectorAll('.reviewer');
-        for(var i = 0; i < xs.length; i++) {
+        var allReviews = document.querySelectorAll('blockquote');
+        var users = document.querySelectorAll('.reviewer');
+        var ratings = document.querySelectorAll('.itemRating > strong');
+        for(var i = 0; i < users.length; i++) {
             var myObj = {
-                reviewer: xs[i].querySelectorAll('dd')[0].innerHTML,
-                date: xs[i].querySelectorAll('dd')[1].innerHTML
+                reviewer: users[i].querySelectorAll('dd')[0].innerHTML,
+                date: users[i].querySelectorAll('dd')[1].innerHTML,
+                rating: ratings[i].innerHTML,
+                review: {
+                    heading: allReviews[i].querySelector('h6').innerHTML,
+                    content: allReviews[i].querySelector('p').innerHTML
+                }
             }
             junk.push(myObj);
         }
@@ -20,7 +27,7 @@ const phantom = require('phantom');
     });
 
     for(let i = 0; i < reviews.length; i++)
-        console.log(reviews[i].reviewer + " " + " " + reviews[i].date);
+        console.log(reviews[i].reviewer + " " + reviews[i].date + " " + reviews[i].rating + " " + reviews[i].review.heading + " " + reviews[i].review.content);
 
     await instance.exit();
 }());
