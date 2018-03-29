@@ -1,0 +1,37 @@
+.header {
+    font-family: "roboto";
+    font-size: 4em;
+    color: whitesmoke;
+}
+
+.row {
+    text-align: center;
+    background-color: #222;
+}
+
+.urls {
+    font-size: .5em;
+    margin-bottom: 30px;
+    font-family: "roboto";
+    color: whitesmoke;
+}
+
+.btn {
+    border-radius: 0px !important;
+    height: 35px;
+    margin-bottom: 3px;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+#myUrl {
+    height: 35px;
+    width: 70%;
+}
+
+.clearfix {
+    height: 5vh;
+    background-color: #222;
+}
