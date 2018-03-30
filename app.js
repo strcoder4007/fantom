@@ -1,9 +1,16 @@
 const phantom = require('phantom');
 
-(async function() {
+if (process.argv.length <= 2) {
+    console.log("Enter the url. Eg: node app.js url_here");
+    process.exit(-1);
+}
+ 
+var url = process.argv[2];
+
+(async function(url) {
     const instance = await phantom.create();
     const page = await instance.createPage();
-    const status = await page.open('http://www.tigerdirect.com/applications/SearchTools/item-details.asp?EdpNo=3415697');
+    const status = await page.open(url);
     const content = await page.property('content');
     
     var reviews = await page.evaluate(function() {
@@ -27,7 +34,7 @@ const phantom = require('phantom');
     });
 
     for(let i = 0; i < reviews.length; i++)
-        console.log(reviews[i].reviewer + " " + reviews[i].date + " " + reviews[i].rating + " " + reviews[i].review.heading + " " + reviews[i].review.content);
+        console.log("Reviewer: " + reviews[i].reviewer + "\nDate: " + reviews[i].date + "\nRating: " + reviews[i].rating + "/5\n" + reviews[i].review.heading + "\n" + reviews[i].review.content + "\n\n");
 
     await instance.exit();
-}());
+}(url));
