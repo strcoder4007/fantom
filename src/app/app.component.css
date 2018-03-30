@@ -35,3 +35,24 @@ a {
     height: 5vh;
     background-color: #222;
 }
+
+.name {
+    text-align: center;
+    font-family: "roboto";
+    font-size: 2em;
+    color: whitesmoke;
+}
+
+.leftCol {
+    font-size: .8em;
+    font-family: "roboto";
+    color: whitesmoke;
+    text-align: left;
+}
+
+.rightCol {
+    text-align: left;
+    font-size: 1em;
+    font-family: "roboto";
+    color: whitesmoke;
+}
